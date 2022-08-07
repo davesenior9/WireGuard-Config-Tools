@@ -64,7 +64,7 @@ DDNS (when configure) will associate any given Public IP Address, with a preconf
 #### Modify AWS Instance Firewall
 - On the AWS Instance dashboard, navigate to Security, and select the 'security group' hyper link.
 - Then select 'Edit inbound rules'
-- Select 'Add rule' > Custom TCP, Port Range 41194, Description 'WG'
+- Select 'Add rule' > Custom UDP, Port Range 41194, Description 'WG'
 -  ##### NOTE: By default, the Ubuntu VM does not run a firewall, the online protection from the Internet is this web based firewall hosted on AWS. Use this with caution. Use UFW or IPTABLES on the Ubuntu VM for more granular security.
 
 #### Enable Spoke to Spoke Communication
