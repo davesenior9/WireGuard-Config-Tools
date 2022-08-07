@@ -7,7 +7,7 @@ cmd = os.system('mkdir /etc/wireguard/clients')
 cmd = os.system('mkdir /etc/wireguard/clients/client1')
 cmd = os.system('touch /etc/wireguard/ddns.txt')
 with open('/etc/wireguard/ddns.txt', 'w') as f:
-    f.write('example.ddns.net')
+    f.write('example.ddns.net:41194')
     f.close
 cmd = os.system('umask 077; wg genkey | tee /etc/wireguard/serverkeys/privatekey | wg pubkey > /etc/wireguard/serverkeys/publickey')
 
