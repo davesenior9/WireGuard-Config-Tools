@@ -40,7 +40,7 @@ DDNS (when configure) will associate any given Public IP Address, with a preconf
 - Clone the following GitHub Repo `git clone https://github.com/davesenior9/WireGuard-Config-Tools`
 - Move to the WireGuard-Config-Tools directory `cd WireGuard-Config-Tools`, this should return a confirmatory message.
 - Run WGServer.py to create the baseline required `sudo python3 WGServer.py`
-- Update the ddns.txt file with your Domain Name, deleting the existing 'example.ddns.net' `sudo nano /etc/wireguard/ddns.txt`
+- Update the ddns.txt file with your Domain Name, replacing the existing 'example.ddns.net:41194' `sudo nano /etc/wireguard/ddns.txt`. Ensure the trailing port number remains in the string (41194).
 	
 	#### Associate the Domain Name with the AWS Instance
 	
