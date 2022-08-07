@@ -15,6 +15,7 @@ def user_generate(client_number, description):
     with open(f'/etc/wireguard/ddns.txt', 'r') as f:
         ddns = f.read()
         ddns = str(ddns)
+        ddns = ddns + '41194'
         if 'example' in ddns:
             print ('ERROR: UPDATE THE DDNS FILE')
             return
