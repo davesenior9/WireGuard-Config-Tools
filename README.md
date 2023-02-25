@@ -49,7 +49,7 @@ DDNS (when configure) will associate any given Public IP Address, with a preconf
 	
 - Install ddclient to setup the software that will bind the Domain Name to the public IP of the AWS Instance `sudo apt install ddclient`
 - Follow the prompts, entering your User and Password, selecting 'Web Based IP Discovery`, rather than 'Network Interface', then finally, your Domain Name.
->** NOTE ** 
+>**NOTE**
 >This can be problematic. Confirm status of ddclient, using `sudo service ddclient status` if the service is functioning, you should see `SUCCESS:  updating example.ddns.net: good: IP address set to 3.27.38.227`
 &nbsp;
 - If you do not see the above message, complete the following:
