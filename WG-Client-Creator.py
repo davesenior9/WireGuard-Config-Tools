@@ -18,7 +18,7 @@ def user_generate(client_number, description):
         if 'example' in ddns:
             print ('ERROR: UPDATE THE DDNS FILE')
             return
-    default_data = [(f'#Client{client_number} = {description}\n'),'[Interface]\n', (f'PrivateKey = {private_key}'), (f'Address = 192.168.100.{client_number}/32\n'), '\n[Peer]\n', (f'PublicKey = {srv_pub_key}'), (f'AllowedIPs = 192.168.100.0/24\n'), (f'Endpoint = {ddns}'), (f'PersistentKeepalive = 15\n')]
+    default_data = [(f'#Client{client_number} = {description}\n'),'[Interface]\n', (f'PrivateKey = {private_key}'), (f'Address = 192.168.100.{client_number}/32\n'), ('DNS = 1.1.1.1\n') '\n[Peer]\n', (f'PublicKey = {srv_pub_key}'), (f'AllowedIPs = 192.168.100.0/24\n'), (f'Endpoint = {ddns}'), (f'PersistentKeepalive = 15\n')]
     with open(f'/etc/wireguard/clients/client{client_number}/client.conf', 'w') as f:
         f.writelines(default_data)
         f.close
