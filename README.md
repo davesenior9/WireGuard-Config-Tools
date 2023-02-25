@@ -1,5 +1,5 @@
 
-# WireGuard Server
+# WireGuard Server and Client Generator
 #### Preface
 This is a guide to establish a WireGuard VPN in a Hub and Spoke topology, using AWS as the Hub. The Spokes will have the ability to communicate with each other, via the Hub, and if required, the Spokes can have their LANs communicate across the VPN. Additionally, you can use this guide to create a 'traditional' VPN Server, in the way that protects ALL data and DNS queries from your ISP.
 #### Create a Domain Name
