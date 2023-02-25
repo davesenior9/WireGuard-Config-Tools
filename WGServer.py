@@ -35,5 +35,5 @@ try:
     print ('### WG Server Successfully Configured ###')
 
 except Exception as error:
-    print ("An exception was thrown!")
+    print ("An exception was thrown! Are you sure you ran the script as root. Use 'sudo xxxx'")
     print (str(error))
