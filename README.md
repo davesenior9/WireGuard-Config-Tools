@@ -1,13 +1,13 @@
 
 # WireGuard Server
 #### Preface
-This is a guide to establish a WireGuard VPN in a Hub and Spoke topology, using AWS as the Hub. The Spokes will have the ability to communicate with each other, via the Hub, and if required, the Spokes can have their LANs communicate across the VPN.
+This is a guide to establish a WireGuard VPN in a Hub and Spoke topology, using AWS as the Hub. The Spokes will have the ability to communicate with each other, via the Hub, and if required, the Spokes can have their LANs communicate across the VPN. Additionally, you can use this guide to create a 'traditional' VPN Server, in the way that protects ALL data and DNS queries from your ISP.
 #### Create a Domain Name
-As a VPN endpoint requires a destination to terminate, we need to specify an IP address or a Domain Name with our configuration, that is 'Publicly Accessible'. There are several variables that can complicate this such as ISP NAT Configurations, Availability Issues, Cost of a fixed 'Public IP', availability to the Internet (Public vs Private) etc. To remove complications, we will use a free AWS instance.
+As a VPN client requires a destination to terminate, we need to specify an IP address or a Domain Name with our configuration, that is 'Publicly Accessible'. When using privately owned infrastrcutre, several variables exist that can complicate this such as ISP NAT Configurations, Availability Issues, Cost of a fixed 'Public IP', availability to the Internet (Public vs Private) etc. To remove complications, we will use a free AWS instance.
 
-By default, and AWS instance will be allocated a Public IP on creation, however, this IP is not permanently allocated to that instance. Things such as reboots can cause an instance to 'release' the IP it was using, and be allocated a new one. This is problematic as a client device might be installed at a distant location, with a fixed IP address in its VPN Config. If the Server then changes that IP Address, the client will never be able to re-establish a connection, as it will have the old/stale address. This can be resolved using Dynamic Domain Name Services.
+By default, and AWS instance will be allocated a Public IP on creation, however, this IP is not permanently allocated to that instance. Things such as reboots can cause an instance to 'release' the IP it was using, and be allocated a new one. This is problematic as a client device might be installed at a distant location, with a fixed IP address in its VPN Config. If the Server then changes that IP Address, the client will never be able to re-establish a connection, as it will have the old/stale address. A potential fix to this is by paying for/using an 'Elastic IP' on AWS. This essentially permanantly assigns a 'Public IP' to your AWS Instance. However, this would still required you to remember and IP rather than a more memorable naming convetion, this can be resolved using Dynamic Domain Name Services.
 
-DDNS (when configure) will associate any given Public IP Address, with a preconfigured, Human Readable Domain Name (aka Fully Qualified Domain Name -- FQDN). To 'own' a domain name such as Google.com, costs money. We will use a free service, with the only caveat being that the domain must be renewed/claimed, every 30 days, otherwise it will be available for use again, by anyone in the world.
+DDNS (when configure) will associate any given Public IP Address, with a preconfigured, Human Readable Domain Name (aka Fully Qualified Domain Name -- FQDN). To 'own' a domain name such as Google.com, costs money. We will use a free service, with the only caveat being that the domain must be renewed/claimed, every 30 days, otherwise it will be available for use again, by anyone in the world. Alternatively, you can use the default AWS FQDN with your instance, that may look like something similiar to this 'ec2-13-211-22-111.ap-southeast-2.compute.amazonaws.com'. This will have the effect of a FQDN, but it is lengthy and not memorable.
 
 #### NO-IP DDNS
 
@@ -32,8 +32,10 @@ DDNS (when configure) will associate any given Public IP Address, with a preconf
 - FOR PPK - Open Putty, Navigate to Connection > SSH > Auth and import your downloaded Key Pair
 - FOR PEM - Using CLI, use string `ssh -i <KEY PAIR.PEM> ubuntu@<PUB IP>` eg. `ssh -i C:\Users\Demo\Downloads\DEMO.pem ubuntu@13.155.13.55`
 - Once you have your keypair mapped, enter your public IP address you have just copied, and start the SSH Session. The login will be `ubuntu` and the password is not required, as you are using a 'public certificate' as your authentication method (An account can be made so that is password protected, however, this should be used with caution).
+
+!!! Ensure you are using the most recent version of Putty, or SSH. If you encounter errors, this should be your first troubleshooting change.
 	
-	#### Building the WireGuard Server
+#### Building the WireGuard Server
 	
 -  Once logged in`sudo apt update && sudo apt upgrade`
 - Install WG and supporting packages `sudo apt install wireguard qrencode git`
@@ -73,5 +75,15 @@ DDNS (when configure) will associate any given Public IP Address, with a preconf
 - Run `sudo python3 WG-Client-Creator.py`
 - Once the client is created, you need a method to move the client profile to the desired endpoint. This can be done on some devices such as Android/iPhone by scanning the QR Code (when prompted). For other devices like PCs/SBCs, you must copy the contents of the clients profile into a corresponding config file eg. on a RPi `/etc/wireguard/wg0.conf` or on a Windows 10 WireGuard application, Creating a Tunnel and dumping the text, or saving the content as a `client.conf` file and importing it. If you have the know-how, use an SFTP tool such as WinSCP or basic sftp CLI to retrieve the file.
 - Client configs and keys are stored within their own folders at `/etc/wireguard/clients/clientX`
+
+#### Force All Web Traffic Through VPN
+
+You may want to force all of the traffic from your device to route via the WG Server.
+&nbsp; 
+Edit the `Allowed IPs` section of the client.conf. This can be done after the fact, eg. once the profile has been loaded onto a device, you can simply edit and activate. The `Allowed IPs` section of the Client profile will, upon VPN Activation, create a Route in your devices routing and send all traffic to listed networks via the WG interface.
+&nbsp;
+    Adding `AllowedIPs = 0.0.0.0/0` tells your device to send all traffic through the VPN. Ensure you have a Public DNS Server in you client config, eg. `DNS = 1.1.1.1`.
+&nbsp;    
+
 	       
 
