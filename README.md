@@ -33,7 +33,8 @@ DDNS (when configure) will associate any given Public IP Address, with a preconf
 - FOR PEM - Using CLI, use string `ssh -i <KEY PAIR.PEM> ubuntu@<PUB IP>` eg. `ssh -i C:\Users\Demo\Downloads\DEMO.pem ubuntu@13.155.13.55`
 - Once you have your keypair mapped, enter your public IP address you have just copied, and start the SSH Session. The login will be `ubuntu` and the password is not required, as you are using a 'public certificate' as your authentication method (An account can be made so that is password protected, however, this should be used with caution).
 
-!!! Ensure you are using the most recent version of Putty, or SSH. If you encounter errors, this should be your first troubleshooting change.
+>**NOTE** 
+>Ensure you are using the most recent version of Putty, or SSH. If you encounter errors, this should be your first troubleshooting change.
 	
 #### Building the WireGuard Server
 	
@@ -48,8 +49,10 @@ DDNS (when configure) will associate any given Public IP Address, with a preconf
 	
 - Install ddclient to setup the software that will bind the Domain Name to the public IP of the AWS Instance `sudo apt install ddclient`
 - Follow the prompts, entering your User and Password, selecting 'Web Based IP Discovery`, rather than 'Network Interface', then finally, your Domain Name.
-	- !!! This can be problematic. Confirm status of ddclient, using `sudo service ddclient status` if the service is functioning, you should see `SUCCESS:  updating example.ddns.net: good: IP address set to 3.27.38.227` !!!
-		- If you do not see the above message, complete the following:
+>** NOTE ** 
+>This can be problematic. Confirm status of ddclient, using `sudo service ddclient status` if the service is functioning, you should see `SUCCESS:  updating example.ddns.net: good: IP address set to 3.27.38.227`
+&nbsp;
+- If you do not see the above message, complete the following:
 			- modify the ddclient.conf file `sudo nano /etc/ddclient.conf`
 			- ensure it has the following:
 			- `protocol=dyndns2`
