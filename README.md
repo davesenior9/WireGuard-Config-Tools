@@ -88,5 +88,13 @@ Edit the `Allowed IPs` section of the client.conf. This can be done after the fa
     Adding `AllowedIPs = 0.0.0.0/0` tells your device to send all traffic through the VPN. Ensure you have a Public DNS Server in you client config, eg. `DNS = 1.1.1.1`.
 &nbsp;    
 
-	       
+#### Debugging
+
+To Enable Debugging.
+`sudo modprobe wireguard`
+`echo module wireguard +p | sudo tee /sys/kernel/debug/dynamic_debug/control`
+Use `tail -f /var/log/kern.log`
+
+To Disable Debugging.
+`echo module wireguard -p | sudo tee /sys/kernel/debug/dynamic_debug/control`
 
