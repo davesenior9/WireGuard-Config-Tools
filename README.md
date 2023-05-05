@@ -85,7 +85,7 @@ You may want to force all of the traffic from your device to route via the WG Se
 &nbsp; 
 Edit the `Allowed IPs` section of the client.conf. This can be done after the fact, eg. once the profile has been loaded onto a device, you can simply edit and activate. The `Allowed IPs` section of the Client profile will, upon VPN Activation, create a Route in your devices routing and send all traffic to listed networks via the WG interface.
 &nbsp;
-    Adding `AllowedIPs = 0.0.0.0/0` tells your device to send all traffic through the VPN. Ensure you have a Public DNS Server in you client config, eg. `DNS = 1.1.1.1`.
+    Adding `AllowedIPs = 0.0.0.0/0` tells your device to send all traffic through the VPN. Ensure you have a Public DNS Server in your client config, eg. `DNS = 1.1.1.1`. This is locally significant to the Wireguard Interface.
 &nbsp;    
 
 #### Debugging
