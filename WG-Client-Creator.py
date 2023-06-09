@@ -61,6 +61,10 @@ while True:
         restart = input('Do you want to make another Client?(y/n)\n')
         if restart == 'y':
             pass
+        view_config = input(f'Do you want to view config of Client{client_number}?(y/n)\n')
+        if view_config == 'y': 
+            f = open(f'/etc/wireguard/clients/client{client_number}/client.conf')
+            print (f)
         else:
             break
     except KeyboardInterrupt:
