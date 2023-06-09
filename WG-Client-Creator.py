@@ -64,7 +64,9 @@ while True:
         view_config = input(f'Do you want to view config of Client{client_number}?(y/n)\n')
         if view_config == 'y': 
             f = open(f'/etc/wireguard/clients/client{client_number}/client.conf')
+            f = f.read()
             print (f)
+            break
         else:
             break
     except KeyboardInterrupt:
