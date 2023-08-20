@@ -1,7 +1,7 @@
 
 # WireGuard Server and Client Generator
 #### Preface
-This is a guide to establish a WireGuard VPN in a Hub and Spoke topology, using AWS as the Hub. The Spokes will have the ability to communicate with each other, via the Hub, and if required, the Spokes can have their LANs communicate across the VPN. Additionally, you can use this guide to create a 'traditional' VPN Server, in the way that protects ALL data and DNS queries from your ISP.
+This is a guide to establish a WireGuard VPN in a Hub and Spoke topology, using AWS as the Hub. The Spokes will have the ability to communicate with each other, via the Hub, and if required, the Spokes can have their LANs communicate across the VPN. Additionally, you can use this guide to create a 'traditional' VPN Server, in the way that protects ALL data and DNS queries from your ISP.\
 [WG Dashboard](https://github.com/donaldzou/WGDashboard) Does Server/Client management much better than the CLI method's included in this guide. It is a seemless install and easy to use!
 #### Create a Domain Name
 As a VPN client requires a destination to terminate, we need to specify an IP address or a Domain Name with our configuration, that is 'Publicly Accessible'. When using privately owned infrastrcutre, several variables exist that can complicate this such as ISP NAT Configurations, Availability Issues, Cost of a fixed 'Public IP', availability to the Internet (Public vs Private) etc. To remove complications, we will use a free AWS instance.
